@@ -1,0 +1,40 @@
+version: "3.8"
+
+# TROCAR antes do deploy: a imagem (repositório no GHCR) e o domínio no Host().
+services:
+  lp-consulta:
+    image: ghcr.io/felip2ee/lp-consulta-eliane:latest
+    networks:
+      - RainhaNet
+    deploy:
+      mode: replicated
+      replicas: 2
+      placement:
+        constraints:
+          - node.role == manager
+      update_config:
+        order: start-first
+        failure_action: rollback
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 256M
+      labels:
+        - traefik.enable=true
+        - traefik.docker.network=RainhaNet
+
+        # HTTPS
+        - traefik.http.routers.lp-consulta.rule=Host(`consulta.elianearainhadocredito.com`)
+        - traefik.http.routers.lp-consulta.entrypoints=websecure
+        - traefik.http.routers.lp-consulta.tls.certresolver=letsencryptresolver
+        - traefik.http.routers.lp-consulta.priority=1
+        - traefik.http.routers.lp-consulta.service=lp-consulta
+        - traefik.http.services.lp-consulta.loadbalancer.server.port=80
+        - traefik.http.services.lp-consulta.loadbalancer.passHostHeader=true
+
+networks:
+  RainhaNet:
+    external: true
+    name: RainhaNet

@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-ivory font-sans antialiased overflow-x-hidden;
+  }
+  h1, h2, h3, h4 {
+    @apply font-display tracking-tight;
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  ::selection {
+    background: #DCA452;
+    color: #02150E;
+  }
+  :focus-visible {
+    outline: 3px solid rgba(220, 164, 82, 0.8);
+    outline-offset: 3px;
+  }
+}
+
+/* Grão fino por cima de tudo, igual à LP do Beabá */
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 60;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Única animação não disparada pelo usuário: a entrada do hero. */
+@keyframes hero-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes hero-photo-in {
+  from { opacity: 0; transform: translateY(24px) scale(0.985); }
+  to   { opacity: 1; transform: none; }
+}
+.hero-in   { animation: hero-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.hero-in-2 { animation: hero-in 0.7s 0.12s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.hero-in-3 { animation: hero-in 0.7s 0.24s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.hero-photo { animation: hero-photo-in 1s 0.2s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+/* Brilho do botão principal ao passar o mouse */
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+}
+.btn-shine::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.28), transparent);
+  transform: skewX(-12deg);
+  transition: left 0.6s ease;
+}
+.btn-shine:hover::after {
+  left: 160%;
+}
+
+/* Halo dourado atrás da foto da Eliane */
+.gold-halo {
+  background: radial-gradient(closest-side, rgba(220, 164, 82, 0.38), rgba(220, 164, 82, 0.08) 60%, transparent 72%);
+}
+
+/* Carimbo da ficha de análise */
+.stamp {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  border: 2px solid currentColor;
+  border-radius: 6px;
+  padding: 0.3rem 0.6rem;
+  transform: rotate(-4deg);
+  opacity: 0.85;
+}
+
+/* Acordeão do FAQ: abre com transição de altura */
+.acc-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s ease;
+}
+.acc-panel[data-open="true"] {
+  grid-template-rows: 1fr;
+}
+.acc-panel > div {
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .hero-in, .hero-in-2, .hero-in-3, .hero-photo { animation: none; }
+  .btn-shine::after { transition: none; }
+  .acc-panel { transition: none; }
+}
