@@ -74,11 +74,17 @@ export default function ConviteCard({ oferta, href }) {
               {oferta.preco ? (
                 <>
                   <p className="text-sm text-ivory/60">{oferta.precoLabel}</p>
+                  {oferta.precoCheio && (
+                    <p className="mt-1 font-display text-lg font-bold text-ivory/50 line-through">{oferta.precoCheio}</p>
+                  )}
                   <p className="mt-1 font-display text-5xl font-extrabold leading-none text-accent sm:text-6xl">{oferta.preco}</p>
                   <p className="mt-2 text-ivory/75">{oferta.pagamento}</p>
                 </>
               ) : (
                 <p className="font-display text-xl font-extrabold leading-snug text-white sm:text-2xl">{oferta.chamada}</p>
+              )}
+              {oferta.escassez && (
+                <p className="mt-3 self-start rounded-full border border-accent/50 px-3 py-1 text-xs font-semibold leading-snug text-accent">{oferta.escassez}</p>
               )}
 
               <Button href={href} size="block" className="mt-6 w-full">

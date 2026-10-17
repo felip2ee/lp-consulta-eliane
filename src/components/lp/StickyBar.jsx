@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 // Barra fixa no rodapé do celular. Aparece depois que a pessoa passa do hero
 // e some quando a caixa de oferta ou o CTA final estão na tela.
 // `preco` vazio (versão /beaba) mostra só o rótulo.
-export default function StickyBar({ rotulo, preco, href }) {
+export default function StickyBar({ rotulo, preco, precoCheio, href }) {
   const [visivel, setVisivel] = useState(false);
   const [escondida, setEscondida] = useState(false);
 
@@ -39,7 +39,10 @@ export default function StickyBar({ rotulo, preco, href }) {
           {preco ? (
             <>
               <p className="text-xs text-ivory/60">{rotulo}</p>
-              <p className="font-display text-xl font-extrabold text-accent">{preco}</p>
+              <p className="font-display text-xl font-extrabold text-accent">
+                {precoCheio && <s className="mr-1.5 text-xs font-semibold text-ivory/50">{precoCheio}</s>}
+                {preco}
+              </p>
             </>
           ) : (
             <p className="font-display text-sm font-bold text-white">{rotulo}</p>

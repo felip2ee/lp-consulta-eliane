@@ -7,11 +7,16 @@
 export const config = {
   // Oferta
   precoFormatado: 'R$ 497',
+  // Âncora e escassez: valor cheio e o mês da condição. Esvazie precoCheio pra
+  // tirar o "de R$ 1.000 por" de toda a página.
+  precoCheio: 'R$ 1.000',
+  promocaoMes: 'outubro',
+  promocaoFimMes: 'novembro',
+  promocaoFimData: '31 de outubro de 2026', // só nos termos de uso
   pagamento: 'à vista no Pix ou em 12x de R$ 51,34 no cartão',
   duracaoMinutos: 60,
   formato: 'online, por videochamada',
   vagasPorSemana: null, // coloque o número real (ex.: 6). null mostra "poucos horários por semana"
-  prazoAbatimentoDias: 30,
   remarcacaoAntecedenciaHoras: 24,
   resumoPrazoHoras: 24,
   posConsultaDias: 7,
@@ -55,7 +60,7 @@ export const hero = {
   ],
   cardTitulo: 'Consulta reservada',
   cardLinha: `${config.duracaoMinutos} minutos, ${config.formato}`,
-  cardNota: 'Agenda limitada',
+  cardNota: `Valor de ${config.promocaoMes}. Agenda limitada.`,
 };
 
 // ---------------------------------------------------------------------
@@ -195,7 +200,7 @@ export const rainha = {
 // SOZINHO VS COM A RAINHA
 // ---------------------------------------------------------------------
 export const comparacao = {
-  titulo: 'Tentar de novo sozinho ou sentar com a Rainha',
+  titulo: 'Tentar de novo sozinho ou ter um encontro com a Rainha',
   colunaA: 'Tentar de novo sozinho',
   colunaB: 'Uma consulta com a Rainha',
   linhas: [
@@ -217,7 +222,7 @@ export const comparacao = {
     {
       rotulo: 'Custo',
       a: 'Juros da linha errada, capital parado, cartão PF na empresa',
-      b: `${config.precoFormatado}, que viram crédito se você seguir com a Rainha`,
+      b: `${config.precoFormatado}, que viram crédito se você decidir seguir com a Rainha ainda na consulta`,
     },
   ],
 };
@@ -256,9 +261,11 @@ export const oferta = {
       imagem: '/assets/beaba-mockup.webp',
     },
   ],
-  precoLabel: 'Valor',
+  precoLabel: `Valor em ${config.promocaoMes}`,
+  precoCheio: config.precoCheio,
   preco: config.precoFormatado,
   pagamento: config.pagamento,
+  escassez: `Só em ${config.promocaoMes}. Em ${config.promocaoFimMes} a consulta volta pra ${config.precoCheio}.`,
   cta: 'Agendar minha consulta',
   agenda: `${agendaFrase} Ela também toca as operações dos clientes de consultoria, por isso a agenda é limitada de verdade.`,
   selos: [
@@ -269,7 +276,7 @@ export const oferta = {
   ],
   abatimento: {
     titulo: `Os ${config.precoFormatado} não são dinheiro perdido`,
-    texto: `Se em até ${config.prazoAbatimentoDias} dias você decidir seguir com a Rainha no próximo passo (a análise completa ou o acompanhamento), o valor da consulta é abatido.`,
+    texto: 'Se você decidir seguir com a Rainha no próximo passo (a análise completa ou o acompanhamento), o valor da consulta é abatido. Vale pra decisão tomada ainda na consulta.',
   },
   porque: {
     titulo: `Por que ${config.precoFormatado}?`,
@@ -362,7 +369,11 @@ export const faq = {
     },
     {
       pergunta: 'E se eu seguir com a Rainha depois da consulta?',
-      resposta: `Os ${config.precoFormatado} são abatidos do próximo passo, se você decidir em até ${config.prazoAbatimentoDias} dias. A consulta nunca vira custo a mais.`,
+      resposta: `Os ${config.precoFormatado} são abatidos do próximo passo, se você decidir ainda na consulta. A consulta nunca vira custo a mais.`,
+    },
+    {
+      pergunta: 'Até quando vale esse valor?',
+      resposta: `Só em ${config.promocaoMes}. Em ${config.promocaoFimMes} a consulta volta pra ${config.precoCheio}. Vale o valor do dia do pagamento.`,
     },
     {
       pergunta: 'Posso remarcar?',
@@ -382,7 +393,8 @@ export const ctaFinal = {
   titulo: 'Quer ter esse momento com a Rainha?',
   linhas: [
     `${agendaFrase} Cada consulta é com um empresário de cada vez.`,
-    `Você entra com a sua situação e sai com um caminho. Se não sair, devolvemos o valor. Se seguir com a Rainha, os ${config.precoFormatado} viram crédito.`,
+    `Você entra com a sua situação e sai com um caminho. Se não sair, devolvemos o valor. Se decidir seguir com a Rainha ainda na consulta, os ${config.precoFormatado} viram crédito.`,
+    `Em ${config.promocaoMes}, de ${config.precoCheio} por ${config.precoFormatado}. Em ${config.promocaoFimMes} volta ao valor cheio.`,
   ],
   cta: 'Quero meu momento com a Rainha',
   nota: `${config.precoFormatado}, ${config.pagamento}`,
@@ -404,7 +416,7 @@ export const rodape = {
   aviso: 'Esta página não é de um banco, não concede empréstimos e não garante aprovação de crédito. Quem decide é a instituição financeira. A consulta é orientação profissional sobre o seu caso.',
   termos: {
     titulo: 'Termos de uso',
-    texto: `A Consulta com a Rainha do Crédito é um serviço de orientação em crédito empresarial prestado por Eliane Moreira. Não constitui concessão de crédito, intermediação com resultado garantido nem promessa de aprovação: a decisão é sempre da instituição financeira. As garantias de clareza, encaixe e agenda valem conforme descritas nesta página. Remarcação sem custo uma vez, com ${config.remarcacaoAntecedenciaHoras} horas de antecedência. O abatimento do valor da consulta vale pra contratação do próximo passo em até ${config.prazoAbatimentoDias} dias.`,
+    texto: `A Consulta com a Rainha do Crédito é um serviço de orientação em crédito empresarial prestado por Eliane Moreira. Não constitui concessão de crédito, intermediação com resultado garantido nem promessa de aprovação: a decisão é sempre da instituição financeira. As garantias de clareza, encaixe e agenda valem conforme descritas nesta página. Remarcação sem custo uma vez, com ${config.remarcacaoAntecedenciaHoras} horas de antecedência. O abatimento do valor da consulta vale pra contratação do próximo passo decidida durante a própria consulta. O valor promocional de ${config.precoFormatado} vale pra pagamentos feitos até ${config.promocaoFimData}; depois disso, o valor é ${config.precoCheio}.`,
   },
   privacidade: {
     titulo: 'Política de privacidade',

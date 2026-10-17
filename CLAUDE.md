@@ -11,7 +11,7 @@ Landing page de vendas da **consulta** (R$ 497), primeiro degrau do funil consul
 - **Toda a copy e os números estão em `src/content.js`.** Preço, duração, formato, parcelamento, vagas por semana, prazo do abatimento, link de checkout, link de WhatsApp: tudo no objeto `config` no topo do arquivo. Os textos leem dessas variáveis.
 - Layout e ordem dos blocos: `src/pages/ConsultaLP.jsx`.
 - **Página de obrigado (`/obrigado`)**: `src/pages/Obrigado.jsx`, copy no objeto `obrigado` em `src/content.js`. É o destino do formulário de aplicação da Mentoria RMA (yayforms, link em `obrigado.formularioUrl`). Sem roteador: `src/App.jsx` escolhe a página pelo `window.location.pathname`, e o nginx devolve `index.html` pra qualquer caminho.
-- **Versão upsell (`/beaba`)**: pra quem já comprou o Beabá (CTA na página 34 do manual e redirect de compra aprovada). Mesma `ConsultaLP.jsx`, com o conteúdo de `src/content-beaba.js`, que parte do objeto `conteudo` de `content.js` e troca só o que muda. Oferta é a prometida no manual ("Consulta Direta", sem relógio, pesquisa base, parecer técnico, plano de ação). **Sem preço em lugar nenhum**: a pessoa vê no checkout (`config.checkoutUrlBeaba`). Bônus Beabá some (ela já tem).
+- **Versão upsell (`/beaba`)**: pra quem já comprou o Beabá (CTA na página 34 do manual e redirect de compra aprovada). Mesma `ConsultaLP.jsx`, com o conteúdo de `src/content-beaba.js`, que parte do objeto `conteudo` de `content.js` e troca só o que muda. Oferta é a prometida no manual ("Consulta Direta", sem relógio, diagnóstico da empresa, parecer técnico, linha indicada). Vocabulário: "encontro com a Rainha", nunca "reunião" ou "sentar". **Sem preço em lugar nenhum**: a pessoa vê no checkout (`config.checkoutUrlBeaba`). Bônus Beabá some (ela já tem).
 - Caixa de oferta: `src/components/lp/ConviteCard.jsx`. FAQ, comparação, barra fixa do celular e rodapé em `src/components/lp/`.
 - Imagens em `public/assets/` (cutout da Eliane em alta, retrato emoldurado, chave, logo do Beabá, logo Nova Digital).
 
@@ -32,7 +32,8 @@ Landing page de vendas da **consulta** (R$ 497), primeiro degrau do funil consul
 - Pagamento: "à vista no Pix ou no cartão" (sem número de parcelas até definir).
 - Agenda: sem número de vagas (`vagasPorSemana: null` mostra "poucos horários por semana"). Com o número real, a copy troca sozinha.
 - Garantias: clareza (reembolso se não sair com caminho claro), encaixe (ela recusa e devolve antes da consulta se não puder ajudar) e agenda (uma remarcação sem custo com 24h).
-- Abatimento dos R$ 497 no próximo passo em até 30 dias.
+- Abatimento dos R$ 497 no próximo passo, só se a decisão for tomada ainda na consulta.
+- Preço: de R$ 1.000 por R$ 497 só em outubro de 2026 (`precoCheio`, `promocaoMes` em `config`). Esvaziar `precoCheio` quando acabar.
 - Bônus: Beabá Vol. 1 + Comunidade da Rainha, e o checklist "o que o banco olha" (ainda precisa ser produzido como PDF).
 - Resumo escrito em até 24h e 7 dias de pós-consulta por WhatsApp.
 - Nota fiscal em nome do CNPJ.

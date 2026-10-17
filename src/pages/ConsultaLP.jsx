@@ -55,7 +55,10 @@ export default function ConsultaLP({ conteudo = conteudoPadrao }) {
                 <Button href={ctaHref} size="lg">{hero.cta}</Button>
                 <p className="text-sm leading-tight text-ivory/70">
                   {config.precoFormatado && (
-                    <span className="block font-display text-xl font-extrabold text-white">{config.precoFormatado}</span>
+                    <span className="block font-display text-xl font-extrabold text-white">
+                      {config.precoCheio && <s className="mr-2 text-sm font-semibold text-ivory/50">{config.precoCheio}</s>}
+                      {config.precoFormatado}
+                    </span>
                   )}
                   {hero.ctaNota}
                 </p>
@@ -96,7 +99,10 @@ export default function ConsultaLP({ conteudo = conteudoPadrao }) {
                 </p>
                 <p className="mt-2 text-xs leading-snug text-ivory/80 md:text-sm">{hero.cardLinha}</p>
                 {config.precoFormatado && (
-                  <p className="mt-2 font-display text-2xl font-extrabold text-white">{config.precoFormatado}</p>
+                  <p className="mt-2 font-display text-2xl font-extrabold text-white">
+                    {config.precoCheio && <s className="mr-2 text-sm font-semibold text-ivory/50">{config.precoCheio}</s>}
+                    {config.precoFormatado}
+                  </p>
                 )}
                 <p className="mt-2 text-xs text-ivory/60">{hero.cardNota}</p>
               </div>
@@ -372,7 +378,7 @@ export default function ConsultaLP({ conteudo = conteudoPadrao }) {
       </section>
 
       <Footer />
-      <StickyBar rotulo={hero.cardTitulo} preco={config.precoFormatado} href={ctaHref} />
+      <StickyBar rotulo={hero.cardTitulo} preco={config.precoFormatado} precoCheio={config.precoCheio} href={ctaHref} />
     </div>
   );
 }
